@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<workbook source-platform='mac' version='9.0' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <!-- build 9000.15.0720.1008                                -->
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='9.0'>
+      <aliases enabled='yes' />
+      <column caption='Parameter 2' datatype='integer' name='[Parameter 1]' param-domain-type='list' role='measure' type='quantitative' value='4'>
+        <calculation class='tableau' formula='4' />
+        <members>
+          <member value='1' />
+          <member value='2' />
+          <member value='3' />
+          <member value='4' />
+          <member value='5' />
+          <member value='6' />
+          <member value='7' />
+          <member value='8' />
+          <member value='9' />
+          <member value='10' />
+        </members>
+      </column>
+    </datasource>
+    <datasource caption='Diabetes_data' inline='true' name='textscan.42236.690838321800' version='9.0'>
+      <connection class='textscan' directory='/Users/nehamittal/Documents' filename='Diabetes_data.csv' password='' server=''>
+        <relation name='Diabetes_data#csv' table='[Diabetes_data#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_IN'>
+            <column datatype='integer' name='Cluster Number' ordinal='0' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Cluster Number</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Cluster Number]</local-name>
+            <parent-name>[Diabetes_data#csv]</parent-name>
+            <remote-alias>Cluster Number</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name></remote-name>
+            <remote-type>0</remote-type>
+            <parent-name>[Diabetes_data#csv]</parent-name>
+            <remote-alias></remote-alias>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;Rs&quot;</attribute>
+              <attribute datatype='string' name='debit-close-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='debit-open-char'>&quot;&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_IN&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Average_Production' datatype='real' name='[Calculation_0620820164139439]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='FLOAT(LEFT(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),Find(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),&apos;~&apos;)-1))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='CombinedCalculation' datatype='string' name='[Calculation_0860820164037674]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='SCRIPT_STR(&#10;&quot;&#10;currdir&lt;-getwd()&#10;setwd(&apos;/home/neha/tableau&apos;)&#10;source(&apos;ClusterSimulated.R&apos;)&#10;Clust_Data(as.numeric(.arg1[1]))&#10;&quot;,&#10;[Parameters].[Parameter 1])'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Average NAG' datatype='real' name='[Calculation_2700820170715674]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Calculation_0620820164139439]+[Calculation_9080820164156537]'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='FlagCluster' datatype='boolean' name='[Calculation_3500820163630764]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='[Cluster Number]&lt;=[Parameters].[Parameter 1]' />
+      </column>
+      <column caption='NumberOfAgents' datatype='real' name='[Calculation_4930820164221704]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='FLOAT(RIGHT(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),(LEN(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)))-FIND(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),&apos;~&apos;))))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Average_Depletion' datatype='real' name='[Calculation_9080820164156537]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='FLOAT(LEFT([Calculation_0860820164037674],FIND([Calculation_0860820164037674], &apos;~&apos;)-1))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column datatype='integer' name='[Cluster Number]' role='dimension' type='ordinal'>
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.4' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Parameter 2' datatype='integer' name='[Parameter 1]' param-domain-type='list' role='measure' type='quantitative' value='4'>
+          <calculation class='tableau' formula='4' />
+          <members>
+            <member value='1' />
+            <member value='2' />
+            <member value='3' />
+            <member value='4' />
+            <member value='5' />
+            <member value='6' />
+            <member value='7' />
+            <member value='8' />
+            <member value='9' />
+            <member value='10' />
+          </members>
+        </column>
+      </datasource-dependencies>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet lock-quick-filters='true' lock-updates='true' name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Diabetes_data' name='textscan.42236.690838321800' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='textscan.42236.690838321800'>
+            <column caption='Average_Production' datatype='real' name='[Calculation_0620820164139439]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='FLOAT(LEFT(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),Find(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),&apos;~&apos;)-1))'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='CombinedCalculation' datatype='string' name='[Calculation_0860820164037674]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='SCRIPT_STR(&#10;&quot;&#10;currdir&lt;-getwd()&#10;setwd(&apos;/home/neha/tableau&apos;)&#10;source(&apos;ClusterSimulated.R&apos;)&#10;Clust_Data(as.numeric(.arg1[1]))&#10;&quot;,&#10;[Parameters].[Parameter 1])'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='FlagCluster' datatype='boolean' name='[Calculation_3500820163630764]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[Cluster Number]&lt;=[Parameters].[Parameter 1]' />
+            </column>
+            <column caption='NumberOfAgents' datatype='real' name='[Calculation_4930820164221704]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='FLOAT(RIGHT(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),(LEN(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)))-FIND(RIGHT([Calculation_0860820164037674],LEN([Calculation_0860820164037674])-FIND([Calculation_0860820164037674], &apos;~&apos;)),&apos;~&apos;))))'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Average_Depletion' datatype='real' name='[Calculation_9080820164156537]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='FLOAT(LEFT([Calculation_0860820164037674],FIND([Calculation_0860820164037674], &apos;~&apos;)-1))'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='integer' name='[Cluster Number]' role='dimension' type='ordinal'>
+            </column>
+            <column-instance column='[Calculation_3500820163630764]' derivation='None' name='[none:Calculation_3500820163630764:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Cluster Number]' derivation='None' name='[none:Cluster Number:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_0620820164139439]' derivation='User' name='[usr:Calculation_0620820164139439:qk:1]' pivot='key' type='quantitative'>
+              <table-calc ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+              <table-calc field='[textscan.42236.690838321800].[Calculation_0860820164037674]' ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+            </column-instance>
+            <column-instance column='[Calculation_0860820164037674]' derivation='User' name='[usr:Calculation_0860820164037674:nk:1]' pivot='key' type='nominal'>
+              <table-calc ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+            </column-instance>
+            <column-instance column='[Calculation_4930820164221704]' derivation='User' name='[usr:Calculation_4930820164221704:qk:2]' pivot='key' type='quantitative'>
+              <table-calc ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+              <table-calc field='[textscan.42236.690838321800].[Calculation_0860820164037674]' ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+            </column-instance>
+            <column-instance column='[Calculation_9080820164156537]' derivation='User' name='[usr:Calculation_9080820164156537:qk:1]' pivot='key' type='quantitative'>
+              <table-calc ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+              <table-calc field='[textscan.42236.690838321800].[Calculation_0860820164037674]' ordering-field='[textscan.42236.690838321800].[none:Cluster Number:ok]' ordering-type='Field' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[textscan.42236.690838321800].[none:Calculation_3500820163630764:nk]'>
+            <groupfilter function='member' level='[none:Calculation_3500820163630764:nk]' member='true' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[textscan.42236.690838321800].[none:Cluster Number:ok]'>
+            <groupfilter function='level-members' level='[none:Cluster Number:ok]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[textscan.42236.690838321800].[none:Cluster Number:ok]</column>
+            <column>[textscan.42236.690838321800].[none:Calculation_3500820163630764:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk:1]' />
+            </encodings>
+          </pane>
+          <pane id='1' x-axis-name='[textscan.42236.690838321800].[usr:Calculation_0620820164139439:qk:1]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk:1]' />
+            </encodings>
+          </pane>
+          <pane id='2' x-axis-name='[textscan.42236.690838321800].[usr:Calculation_4930820164221704:qk:2]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk:1]' />
+            </encodings>
+          </pane>
+          <pane id='3' x-axis-name='[textscan.42236.690838321800].[usr:Calculation_9080820164156537:qk:1]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk:1]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[textscan.42236.690838321800].[none:Cluster Number:ok]</rows>
+        <cols>([textscan.42236.690838321800].[usr:Calculation_0620820164139439:qk:1] + ([textscan.42236.690838321800].[usr:Calculation_4930820164221704:qk:2] + [textscan.42236.690838321800].[usr:Calculation_9080820164156537:qk:1]))</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows>
+    <window class='schema' source-height='-1' />
+    <window auto-hidden='0' class='worksheet' maximized='1' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='1' param='[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk:1]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[textscan.42236.690838321800].[none:Calculation_3500820163630764:nk]</field>
+          <field>[textscan.42236.690838321800].[none:Cluster Number:ok]</field>
+          <field>[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk:1]</field>
+          <field>[textscan.42236.690838321800].[usr:Calculation_0860820164037674:nk]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='142' name='Sheet 1' width='192'>
+      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
+      W6cAAAAASUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+</workbook>
